@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--第一步：扫描service下的包-->
+    <context:component-scan base-package="com.cwg.service"/>
+
+    <!--第二步：将我们的所有业务类注入到spring，可以通过配置或者注解实现-->
+    <bean id="BookServiceImpl" class="com.cwg.service.BookServiceImpl">
+        <property name="bookMapper" ref="bookMapper"/>
+    </bean>
+
+    <!--第三步：声明式事务配置-->
+    <!-- 配置事务管理组件 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" value="dataSource"/>
+    </bean>
+
+    <!--第四步：aop事务-->
+
+</beans>
